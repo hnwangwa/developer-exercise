@@ -9,7 +9,7 @@ class FilterButtons extends Component {
 		};
 	}
 
-	toggleMovies = () => {
+	toggleMovieFilter = () => {
 		this.setState({
 			isFiltered: !this.state.isFiltered
 			});
@@ -21,7 +21,7 @@ class FilterButtons extends Component {
 
 
 	}
-	toggleGames = () => {
+	toggleGameFilter = () => {
 		this.setState({
 			isFiltered: !this.state.isFiltered
 			});
@@ -36,8 +36,9 @@ class FilterButtons extends Component {
 		return (
 			<div>
 				<ul>
-					<button onClick={ () => this.toggleMovies()}>Show me movie quotes!</button>
-					<button onClick={ () => this.toggleGames()}>Show me game quotes!</button>
+					<button onClick={ () => this.toggleMovieFilter()}>Show me movie quotes!</button>
+
+					<button onClick={ () => this.toggleGameFilter()}>Show me game quotes!</button>
 				</ul>
 			</div>
 		);
