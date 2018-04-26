@@ -8,7 +8,7 @@ class Array
 		
 		self.each do |ele|
 			if val.class == Regexp
-				if ele[key] && ele[key].match(val)
+				if ele[key] =~ val
 					matches << ele
 				end
 			else
