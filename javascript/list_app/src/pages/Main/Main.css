@@ -44,7 +44,7 @@ body {
 
 #page-numbers > li {
   margin-right: 0.5em;
-  color: blue;
+  color: yellow;
   user-select: none;
   cursor: pointer;
 }

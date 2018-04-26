@@ -43,29 +43,29 @@ class Main extends Component {
 
   }
   render() {
-    const { error, isLoaded, quotes, currentPage, quotesPerPage } = this.state;
-    const indexOfLastQuote = currentPage * quotesPerPage;
-    const indexOfFirstQuote = indexOfLastQuote - quotesPerPage;
-    const currentQuotes = this.state.quotes.slice(indexOfFirstQuote, indexOfLastQuote);
-    const renderQuotes = currentQuotes.map(quote => {
-          return <li key={quote.quote}>"{quote.quote}" by {quote.source} -- {quote.context} ({quote.theme})</li>;
-        });
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(this.state.quotes.length / quotesPerPage); i++) {
-    	pageNumbers.push(i);
-    }
+  	const { error, isLoaded, quotes, currentPage, quotesPerPage } = this.state;
+  	const indexOfLastQuote = currentPage * quotesPerPage;
+  	const indexOfFirstQuote = indexOfLastQuote - quotesPerPage;
+  	const currentQuotes = this.state.quotes.slice(indexOfFirstQuote, indexOfLastQuote);
+  	const renderQuotes = currentQuotes.map(quote => {
+  		return <li key={quote.quote}>"{quote.quote}" by {quote.source} -- {quote.context} ({quote.theme})</li>;
+  	});
+  	const pageNumbers = [];
+  	for (let i = 1; i <= Math.ceil(this.state.quotes.length / quotesPerPage); i++) {
+  		pageNumbers.push(i);
+  	}
 
-    const renderPageNumbers = pageNumbers.map(number => {
-    	return (
-    		<li
-    		key={number}
-    		id={number}
-    		onClick={this.handleClick}
-    		>
-    		{number}
-    		</li>
-    		);
-    });
+  	const renderPageNumbers = pageNumbers.map(number => {
+  		return (
+  			<li
+  			key={number}
+  			id={number}
+  			onClick={this.handleClick}
+  			>
+  			Page {number}
+  			</li>
+  			);
+  	});
 
     if (error) {
       return <div>Error: {error.message}</div>;
