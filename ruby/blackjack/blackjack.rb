@@ -56,17 +56,21 @@ class Hand
 
   def value
     # Want to add up the values of the cards here, keeping in mind that aces have two values
+    @cards.map(&:value).reduce(&:+)
+    
+    sum = 0
     @cards.each do |card|
-      # TODO
+       sum += card.value 
     end
+    sum
   end
 
   def busted?
-    # TODO
+    value > 21
   end
 
   def blackjack?
-    # TODO
+    value == 21 && @cards.count == 2 #A rule I found where the player is immediately paid out!
   end
 end
 
