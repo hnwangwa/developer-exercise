@@ -166,7 +166,9 @@ class HandTest < Test::Unit::TestCase
   end
 
   def test_is_not_blackjack_when_ace_and_any_other_card
-    # TODO
+    @hand.add_card(Card.new(:clubs, :ace, [11, 1]))
+    @hand.add_card(Card.new(:hearts, :six, 6))
+    assert !@hand.blackjack?
   end
 
 end
