@@ -169,4 +169,28 @@ class DeckTest < Test::Unit::TestCase
     @deck.shuffle
     assert_equal @deck.playable_cards.size, 52
   end
+
+#Here's how I would approach the Game class...scaffolding for now
+  #class Game
+ # attr_accessor :player, :deck
+
+  #def initiailze()
+    #@player_hand = Hand.new
+    #@deck = Deck.new
+  #end
+
+  #def start
+    #while !@player_hand.busted?
+      #hit
+     # puts "Your hand is:"
+      #@player_hand
+      #puts "Your current score is: #{@player_hand.value}"
+    #end
+    #puts "Game over! You busted!"
+  #end
+
+  #def hit
+  #  @player_hand.add_card(@deck.deal_card)
+  #end
+#end
 end
