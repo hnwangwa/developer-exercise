@@ -4,6 +4,10 @@ class Card
   def initialize(suit, name, value)
     @suit, @name, @value = suit, name, value
   end
+
+  def ace?
+      name == :ace
+  end 
 end
 
 class Deck
@@ -54,15 +58,42 @@ class Hand
     @cards << card
   end
 
+# Want to add up the values of the cards here, keeping in mind that aces have two values
   def value
-    # Want to add up the values of the cards here, keeping in mind that aces have two values
-    @cards.map(&:value).reduce(&:+)
-    
-    sum = 0
-    @cards.each do |card|
-       sum += card.value 
+     # 1) if there any Aces in he hand
+    if @cards.any?(&:ace?)
+        # 2) calculate an initial guess, based on the higher value of any Aces
+        guess = 0
+        @cards.each do |card|
+            if card.value.is_a? Array
+                guess += card.value[0]
+            else
+                guess += card.value
+            end
+        end
+        
+        # 3) if the guess is > 21, calculate another guess based on the lower value of any Aces
+        if guess > 21
+            guess = 0
+            @cards.each do |card|
+                if card.value.is_a? Array
+                    guess += card.value[1]
+                else
+                    guess += card.value
+                end
+            end
+            guess
+        # 4) otherwise return initial guess
+        else
+            guess
+        end
+    else
+        sum = 0
+        @cards.each do |card|
+            sum += card.value 
+        end
+        sum
     end
-    sum
   end
 
   def busted?
