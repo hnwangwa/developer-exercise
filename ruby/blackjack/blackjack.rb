@@ -84,6 +84,8 @@ class Game
     end
 
 
+    # the skeletal beginnings of a play method
+
     #def play!
       #loop do
         #@players.each do |player|
@@ -322,7 +324,7 @@ class DeckTest < Test::Unit::TestCase
     assert_equal @deck.playable_cards.size, 52
   end
 
-#Here's how I would approach the Game class...scaffolding for now
+#Here's an old theoretical approach to gameplay 
   #class Game
  # attr_accessor :player, :deck
 
