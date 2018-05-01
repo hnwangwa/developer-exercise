@@ -1,3 +1,108 @@
+class Player
+    def initialize
+        @hand = Hand.new
+    end
+    
+    def has_hand?
+        not @hand.nil?
+    end
+    
+    def receive_hand(h)
+        @hand = h
+    end
+    
+    def receive_card(card)
+        @hand.add_card(card)
+    end
+    
+    def hand_count
+        @hand.cards.count
+    end
+
+    def show_card
+        @hand.cards.first
+    end
+
+    def busted?
+        @hand.busted?
+    end
+
+    def want_hit?
+        @hand.value < 15
+    end
+
+    def dealer?
+      false
+    end
+
+    def have_blackjack?
+        @hand.blackjack?
+    end
+
+    def to_s
+      "#<Player #{@hand}>"
+    end
+end
+
+class Dealer < Player
+    def initialize
+        @deck = Deck.new
+        @deck.shuffle
+        super
+    end
+    
+    def deal(player)
+        player.receive_card(@deck.deal_card)
+    end
+
+    def dealer?
+      true
+    end
+
+    def want_hit?
+      @hand.value < 17
+    end
+
+    def to_s
+      "#<Dealer #{@hand}>"
+    end
+end
+
+class Game
+    attr_reader :dealer, :players
+    
+    def initialize
+        @dealer  = Dealer.new
+        @players = [Player.new, Player.new, @dealer]
+        # deal to each player one-by-one
+        (1..2).each do |i|
+            @players.each do |player|
+                @dealer.deal(player)
+                puts player.to_s
+            end
+        end
+    end
+
+
+    #def play!
+      #loop do
+        #@players.each do |player|
+          #if @players.count == 1 or player.have_blackjack?
+            #Wbreak
+          #end
+
+          #if player.want_hit?
+            #player.receive_card(@dealer.deal_card)
+          #end
+
+          #if player.busted?
+            #@players.delete_at!(@players.index_of(player))
+          #end
+        #end
+      #end
+    #end
+end
+
 class Card
   attr_accessor :suit, :name, :value
 
@@ -7,7 +112,11 @@ class Card
 
   def ace?
       name == :ace
-  end 
+  end
+
+  def to_s
+    "#<Card #{name} of #{suit}>"
+  end
 end
 
 class Deck
@@ -52,6 +161,10 @@ class Hand
 
   def initialize
     @cards = []
+  end
+
+  def to_s
+    "#<Hand #{@cards.join(', ')}>"
   end
 
   def add_card(card)
